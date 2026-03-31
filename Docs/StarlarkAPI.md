@@ -2,7 +2,7 @@
 
 | 項目 | 内容 |
 |---|---|
-| 文書バージョン | 1.0.0 |
+| 文書バージョン | 1.0.1 |
 | 対象フェーズ | Phase 1（読み込み・保存・リネーム） |
 | 対象ファイル形式 | Daslight5 `.dvc5` (XML) |
 | スクリプト言語 | [Starlark](https://github.com/bazelbuild/starlark)（Python サブセット） |
