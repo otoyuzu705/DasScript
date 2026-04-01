@@ -15,7 +15,7 @@ DasScript は、Starlark スクリプトを使って Daslight5 の `.dvc5` プ�
 
 ## ビルド・テストコマンド
 
-`go.mod` 初期化後（モジュール名は未確定、おそらく `github.com/otoyuzu705/DasScript`）:
+`go.mod` 初期化後（モジュール名は `github.com/otoyuzu705/DasScript`）:
 
 ```bash
 go build ./cmd/dvc5       # CLI バイナリのビルド
