@@ -1,0 +1,21 @@
+# ビルド成果物
+dist/
+
+# テストキャッシュ・カバレッジ
+*.test
+*.out
+coverage.html
+
+# Go ツールチェーン
+go.work
+go.work.sum
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
