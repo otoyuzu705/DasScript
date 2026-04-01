@@ -2,11 +2,11 @@
 
 | 項目 | 内容 |
 |---|---|
-| 文書バージョン | 1.0.1 |
+| 文書バージョン | 1.0.2 |
 | 対象フェーズ | Phase 1（読み込み・保存・リネーム） |
 | 対象実装言語 | Go 1.22 以上 |
 | 対象読者 | 本プロジェクトの実装者 |
-| 最終更新 | 2025-01 |
+| 最終更新 | 2026-04 |
 
 ---
 
@@ -242,11 +242,14 @@ var (
 // domain/port/project_reader.go
 package port
 
-import "github.com/yourname/dvc5/domain/model"
+import (
+    "context"
+    "github.com/yourname/dvc5/domain/model"
+)
 
 // ProjectReader は dvc5 ファイルを読み込み model.Project を返す。
 type ProjectReader interface {
-    Read(path string) (*model.Project, error)
+    Read(ctx context.Context, path string) (*model.Project, error)
 }
 ```
 
@@ -254,12 +257,17 @@ type ProjectReader interface {
 // domain/port/project_writer.go
 package port
 
-import "github.com/yourname/dvc5/domain/model"
+import (
+    "context"
+    "github.com/yourname/dvc5/domain/model"
+)
 
 // ProjectWriter は model.Project を dvc5 ファイルとして書き出す。
-// path が空文字の場合は project.Path を使用する。
 type ProjectWriter interface {
-    Write(project *model.Project, path string) error
+    // Write は project.Path を出力先として書き出す。
+    Write(ctx context.Context, project *model.Project) error
+    // WriteTo は指定した path に書き出す。
+    WriteTo(ctx context.Context, project *model.Project, path string) error
 }
 ```
 
@@ -267,12 +275,15 @@ type ProjectWriter interface {
 // domain/port/script_runner.go
 package port
 
-import "github.com/yourname/dvc5/domain/model"
+import (
+    "context"
+    "github.com/yourname/dvc5/domain/model"
+)
 
 // ScriptRunner は Starlark スクリプトを実行し、変更後の Project を返す。
 // スクリプト内で save_project が呼ばれた場合は Runner 側で処理する。
 type ScriptRunner interface {
-    Run(scriptPath string, project *model.Project) (*model.Project, error)
+    Run(ctx context.Context, scriptPath string, project *model.Project) (*model.Project, error)
 }
 ```
 
@@ -850,5 +861,6 @@ Phase 2 以降の機能追加は、以下の場所のみを変更することで
 
 | バージョン | 日付 | 変更内容 |
 |---|---|---|
+| 1.0.2 | 2026-04 | 全ポートに `context.Context` を追加。`ProjectWriter` を `Write` / `WriteTo` に分割 |
 | 1.0.1 | 2025-01 | `Bank` struct に `Scenes []Scene` のコメントを明記、`RenameScene` 実装仕様を追加 |
 | 1.0.0 | 2025-01 | 初版作成（Phase 1 対象） |
