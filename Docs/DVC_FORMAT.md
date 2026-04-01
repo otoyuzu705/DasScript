@@ -1010,7 +1010,7 @@ TOUCH セクション内には対応する要素が存在しない。
 
 SHORTCUT EVENT DATA="cf7e2578-885e-41c3-8112-f1a0867a1d23:0"
          ACTION TYPE=107 TARGET="fd88edc5-..."  → SCENE
-         TARGETINDEX=9000  ← OSC 専用レンジ
+         TARGETINDEX=9000  ← Bank 9 の通常レンジ（バンク番号由来）
 ```
 
 ### 参照フロー図（ユーザー操作の流れ）
